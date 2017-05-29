@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>ava-futuristic-javaScript-test-runner | Akiya の手記</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="ava,test,node.js" />
+    
+    <meta name="description" content="AVA Futuristic JavaScript test runner https://github.com/avajs/ava  Why AVA? Simple test syntax like tape (e.g. t.deepEqual, t.pass, …) No implicit globals like mocha (e.g describe , it) Runs tests co">
+<meta name="keywords" content="ava,test,node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ava-futuristic-javaScript-test-runner">
+<meta property="og:url" content="https://purepennons.github.io/2017/05/27/ava-futuristic-javaScript-test-runner/index.html">
+<meta property="og:site_name" content="Akiya の手記">
+<meta property="og:description" content="AVA Futuristic JavaScript test runner https://github.com/avajs/ava  Why AVA? Simple test syntax like tape (e.g. t.deepEqual, t.pass, …) No implicit globals like mocha (e.g describe , it) Runs tests co">
+<meta property="og:image" content="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495383789675_image.png">
+<meta property="og:updated_time" content="2017-05-29T17:06:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ava-futuristic-javaScript-test-runner">
+<meta name="twitter:description" content="AVA Futuristic JavaScript test runner https://github.com/avajs/ava  Why AVA? Simple test syntax like tape (e.g. t.deepEqual, t.pass, …) No implicit globals like mocha (e.g describe , it) Runs tests co">
+<meta name="twitter:image" content="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495383789675_image.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Akiya の手記</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/test/">test</a></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/test/">test</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-ava-futuristic-javaScript-test-runner" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ava-futuristic-javaScript-test-runner
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/05/27/ava-futuristic-javaScript-test-runner/" class="article-date">
+            <time datetime="2017-05-27T06:13:00.000Z" itemprop="datePublished">2017-05-27</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ava/">ava</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>, <a class="tag-link" href="/tags/test/">test</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="AVA"><a href="#AVA" class="headerlink" title="AVA"></a>AVA</h1><ul>
+<li>Futuristic JavaScript test runner</li>
+<li><a href="https://github.com/avajs/ava" target="_blank" rel="external">https://github.com/avajs/ava</a></li>
+</ul>
+<h2 id="Why-AVA"><a href="#Why-AVA" class="headerlink" title="Why AVA?"></a>Why AVA?</h2><ul>
+<li>Simple test syntax like <a href="https://github.com/substack/tape#methods" target="_blank" rel="external">tape</a> (e.g. t.deepEqual, t.pass, …)</li>
+<li>No implicit globals like mocha (e.g <code>describe</code> , <code>it</code>)</li>
+<li>Runs tests concurrently (troll!)</li>
+<li>Process isolation for each test file</li>
+<li>Support ES2017 by Babel (stage-4)</li>
+<li>Support:<ul>
+<li>Promise</li>
+<li>Generator</li>
+<li>async/await</li>
+<li>Observable</li>
+</ul>
+</li>
+<li><a href="https://github.com/avajs/ava#why-ava" target="_blank" rel="external">…</a></li>
+</ul>
+<h2 id="Basic-usage"><a href="#Basic-usage" class="headerlink" title="Basic usage"></a>Basic usage</h2><ul>
+<li>Take a look</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">'ava'</span>;</div><div class="line">test(<span class="string">'just a demo'</span>, t =&gt; &#123;</div><div class="line">        t.deepEqual([<span class="number">1</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">2</span>]);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>Run</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># install ava cli</span></div><div class="line">$ npm install -g ava</div><div class="line"></div><div class="line"><span class="comment"># install dependency &amp; run</span></div><div class="line">$ npm install ava</div><div class="line"></div><div class="line"><span class="comment"># run</span></div><div class="line">$ ava</div><div class="line"><span class="comment"># auto reload</span></div><div class="line">$ ava --watch</div><div class="line"></div><div class="line"><span class="comment"># Or you can add the testing script for package.json.</span></div><div class="line">$ ava --init</div><div class="line">$ npm <span class="built_in">test</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Simple result</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495383789675_image.png" alt="Simple result" title="Simple result (ava)"></p>
+<ul>
+<li>Verbose result</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495383967094_image.png" alt="Verbose result" title="Verbose result"></p>
+<ul>
+<li><a href="https://github.com/tapjs/node-tap" target="_blank" rel="external">Tap</a> style result<ul>
+<li>Can integrate with any tap reporters.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495386299449_image.png" alt="Tap sytle result" title="Tape style result"></p>
+<ul>
+<li>Integrate with <a href="https://github.com/calvinmetcalf/tap-nyan" target="_blank" rel="external">tap-nyan</a></li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495386352457_image.png" alt="Tap style result" title="Tap style result"></p>
+<h2 id="Enhanced-assertion-messages"><a href="#Enhanced-assertion-messages" class="headerlink" title="Enhanced assertion messages"></a>Enhanced assertion messages</h2><ul>
+<li>Fail case</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">'ava'</span>;</div><div class="line">test(<span class="string">'enhanced assertion messages - case 1'</span>, t =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> a = &#123;<span class="attr">a</span>: <span class="number">10</span>, <span class="attr">b</span>: <span class="number">20</span>&#125;;</div><div class="line">    <span class="keyword">const</span> b = &#123;<span class="attr">a</span>: <span class="number">20</span>, <span class="attr">b</span>: <span class="number">20</span>&#125;</div><div class="line">    t.deepEqual(a, b);</div><div class="line">&#125;);</div><div class="line">test(<span class="string">'enhanced assertion messages - case 2'</span>, t =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> a = <span class="string">'bar'</span>;</div><div class="line">    <span class="keyword">const</span> b = <span class="string">'bar'</span>;</div><div class="line">    <span class="keyword">const</span> c = <span class="string">'baz'</span>;</div><div class="line">    t.true((a === b) &amp;&amp; (b === c));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>Result<ul>
+<li>case 1</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495385275812_image.png" alt="enhanced assertion messages - case 1" title="enhanced assertion messages - case 1"></p>
+<ul>
+<li>case 2</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495385286736_image.png" alt="enhanced assertion messages - case 2" title="enhanced assertion messages - case 2"></p>
+<ul>
+<li>You can use any assertion library (e.g. <a href="http://chaijs.com/" target="_blank" rel="external">chai</a>, <a href="https://nodejs.org/api/assert.html" target="_blank" rel="external">node assert</a>).</li>
+<li>But the magic assert only supports with default assertion library.</li>
+</ul>
+<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><ul>
+<li>Write babel presets in <code>ava</code> field of <code>package.json</code>.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">"ava": &#123;</div><div class="line">    "babel": &#123;</div><div class="line">      "presets": ["es2015", "stage-0"]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Or just inherit from <code>.babelrc</code>.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">"ava": &#123;</div><div class="line">    "babel": "inherit"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>If you need to load the extra babel modules, use <code>require</code> option in the <code>babel</code> field.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">"ava": &#123;</div><div class="line">  "babel": "inherit",</div><div class="line">  "require": [</div><div class="line">    "babel-register",</div><div class="line">    "babel-polyfill"</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Or you want to load from an entrypoint.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">"ava": &#123;</div><div class="line">  "babel": "inherit",</div><div class="line">  "require": [</div><div class="line">    "./test/set-babel.js"</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>./test/set-babel.js</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'babel-register'</span>)</div><div class="line"><span class="built_in">require</span>(<span class="string">'babel-polyfill'</span>)</div></pre></td></tr></table></figure>
+<h2 id="Test-coverage"><a href="#Test-coverage" class="headerlink" title="Test coverage"></a><a href="https://github.com/avajs/ava/blob/master/docs/recipes/code-coverage.md" target="_blank" rel="external">Test coverage</a></h2><ul>
+<li>Cannot use <a href="https://github.com/gotwarlost/istanbul" target="_blank" rel="external">istanbul</a> for code coverage. Use <a href="https://github.com/istanbuljs/nyc" target="_blank" rel="external">nyc</a> (Istanbul CLI) instead.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nyc ava</div></pre></td></tr></table></figure>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495468151081_image.png" alt="test coverage" title="test coverage"></p>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">    test(<span class="function"><span class="params">t</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">return</span> somePromise().then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</div><div class="line">                    t.is(result, <span class="string">'unicorn'</span>);</div><div class="line">            &#125;);</div><div class="line">    &#125;);</div><div class="line"><span class="string">``</span><span class="string">`    </span></div><div class="line">    </div><div class="line">## Generator</div><div class="line"></div><div class="line">`<span class="string">``</span>javascript    </div><div class="line">    test(<span class="function"><span class="keyword">function</span> * (<span class="params">t</span>) </span>&#123;</div><div class="line">            <span class="keyword">const</span> value = <span class="keyword">yield</span> generatorFn();</div><div class="line">            t.true(value);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">test(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">t</span>) </span>&#123;</div><div class="line">        <span class="keyword">const</span> value = <span class="keyword">await</span> promiseFn();</div><div class="line">        t.true(value);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// Async arrow function</span></div><div class="line">test(<span class="keyword">async</span> t =&gt; &#123;</div><div class="line">        <span class="keyword">const</span> value = <span class="keyword">await</span> promiseFn();</div><div class="line">        t.true(value);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">test(<span class="function"><span class="params">t</span> =&gt;</span> &#123;</div><div class="line">        t.plan(<span class="number">3</span>);</div><div class="line">        <span class="keyword">return</span> Observable.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</div><div class="line">                .filter(<span class="function"><span class="params">n</span> =&gt;</span> &#123;</div><div class="line">                        <span class="comment">// Only even numbers</span></div><div class="line">                        <span class="keyword">return</span> n % <span class="number">2</span> === <span class="number">0</span>;</div><div class="line">                &#125;)</div><div class="line">                .map(<span class="function"><span class="params">()</span> =&gt;</span> t.pass());</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h2><ul>
+<li>use <code>test.cb()</code></li>
+<li><code>t.end()</code> only work with <code>test.cb()</code> , must be called at the end of callback.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test.cb(<span class="function"><span class="params">t</span> =&gt;</span> &#123;</div><div class="line">        <span class="comment">// `t.end` automatically checks for error as first argument</span></div><div class="line">        fs.readFile(<span class="string">'data.txt'</span>, t.end);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Assertions"><a href="#Assertions" class="headerlink" title="Assertions"></a>Assertions</h2><ul>
+<li><code>.pass([message])</code> / <code>.fail([message])</code></li>
+<li><code>.truthy(value, [message])</code> / <code>.falsy(value, [message])</code></li>
+<li><code>.true(value, [message])</code> / <code>.false(value, [message])</code></li>
+<li><code>.is(value, expected, [message])</code> / <code>.not(value, expected, [message])</code></li>
+<li><code>.deepEqual(value, expected, [message])</code> / <code>.notDeepEqual(value, expected, [message])</code></li>
+<li><code>.throws(function|promise, [error, [message]])</code> / <code>.notThrows(function|promise, [message])</code></li>
+<li><code>.regex(contents, regex, [message])</code> / <code>.notRegex(contents, regex, [message])</code></li>
+<li><code>.ifError(error, [message])</code></li>
+<li><code>.snapshot(contents, [message])</code></li>
+</ul>
+<h2 id="Snapshot"><a href="#Snapshot" class="headerlink" title="Snapshot"></a>Snapshot</h2><ul>
+<li>AVA can take a snapshot which uses <a href="https://facebook.github.io/jest/blog/2016/07/27/jest-14.html" target="_blank" rel="external">jest-snapshot</a> under the hood.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<ul>
+<li><code>hello.jsx</code></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import React from 'react'</div><div class="line">import ReactDOM from 'react-dom'</div><div class="line">const Hello = () =&gt; &lt;h1&gt;Hello&lt;/h1&gt;</div><div class="line">export default Hello</div></pre></td></tr></table></figure>
+<ul>
+<li><code>react.spec.js</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">'ava'</span></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> render <span class="keyword">from</span> <span class="string">'react-test-renderer'</span></div><div class="line"><span class="keyword">import</span> Hello <span class="keyword">from</span> <span class="string">'../app/hello.jsx'</span></div><div class="line">test(<span class="string">'test react component'</span>, <span class="keyword">async</span> t =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> dom_tree = render.create(&lt;Hello /&gt;).toJSON()</div><div class="line">    console.log(dom_tree)</div><div class="line">    t.snapshot(dom_tree)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<ul>
+<li>It will create a <code>__snapshots__</code> folder in the test folder and contains the following result.<ul>
+<li>First run</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495473520200_image.png" alt="First run" title="First run"></p>
+<ul>
+<li>Snapshot result</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495473716977_image.png" alt="A snapshot in the __snapshots__ folder" title="A snapshot in the __snapshots__ folder"></p>
+<ul>
+<li>And when the result is not equal to the snapshot, it will fail the test.</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495473860858_image.png" alt="The result was changed" title="The result was changed"></p>
+<ul>
+<li>If you want to update the snapshot, just use <code>--update-snapshots</code> or <code>-u</code> options.<br><a href="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495473968079_image.png" target="_blank" rel="external">https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495473968079_image.png</a></li>
+</ul>
+<h2 id="before-after-Hooks"><a href="#before-after-Hooks" class="headerlink" title="before/after Hooks"></a>before/after Hooks</h2><ul>
+<li><code>test.before()</code>: Hooks before the first test.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> db = init_db(db_config)</div><div class="line">test.before(<span class="keyword">async</span> t =&gt; &#123;</div><div class="line">    <span class="comment">// db connection</span></div><div class="line">    <span class="keyword">await</span> db.sequelize.sync(&#123; <span class="attr">force</span>: <span class="literal">true</span> &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>test.after()</code>: Hooks after the last test.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">    test.after.always(<span class="keyword">async</span> t =&gt; &#123;</div><div class="line">        <span class="comment">// close the db connection</span></div><div class="line">        <span class="keyword">await</span> db.sequelize.close()</div><div class="line">    &#125;)</div><div class="line"><span class="string">``</span><span class="string">`    </span></div><div class="line">  - If you want to guarantee to run the hook (even failure), use `test.after.always()<span class="string">`</span></div><div class="line">  </div><div class="line">## beforeEach/afterEach Hooks</div><div class="line">- `test.beforeEach()<span class="string">`: Hooks before each test.</span></div><div class="line"></div><div class="line">`<span class="string">``</span>javascript</div><div class="line">    test.beforeEach(<span class="keyword">async</span> t =&gt; &#123;</div><div class="line">        t.context.clients = &#123;&#125;</div><div class="line">    &#125;)</div><div class="line"><span class="string">``</span><span class="string">`    </span></div><div class="line"></div><div class="line"></div><div class="line">- `test.afterEach()<span class="string">`: Hooks after each test.</span></div><div class="line">  - Same as `test.after()<span class="string">`, use `</span>test.after.always()<span class="string">` to guarantee the hook.</span></div><div class="line">  </div><div class="line">`<span class="string">``</span>javascript  </div><div class="line">    test.afterEach.always(<span class="keyword">async</span> t =&gt; &#123;</div><div class="line">        <span class="built_in">Object</span>.keys(t.context.clients)</div><div class="line">          .map(<span class="function"><span class="params">client</span> =&gt;</span> t.context.clients[client].disconnect())</div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
+<ul>
+<li>You can share the context (<code>t.context</code>) in each test. (<strong>Only works for beforeEach/afterEach hooks</strong>)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test(<span class="keyword">async</span> t =&gt; &#123;</div><div class="line">  t.context.clients[<span class="string">'client1'</span>] = socket.connect(socket_url, client_ops)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="Other-APIs"><a href="#Other-APIs" class="headerlink" title="Other APIs"></a>Other APIs</h2><ul>
+<li><code>test.serial()</code>: Force test serialization.</li>
+<li><code>test.only()</code>: Running specific tests (effect all test files).</li>
+<li><code>test.skip()</code>: Just skip the test.</li>
+<li><code>test.todo()</code>: Add a todo test, AVA will ignore it.</li>
+<li><code>test.failing()</code>: Mark known failure.</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495466321942_image.png" alt="Without .failing()" title="Without .failing()"></p>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495466344215_image.png" alt="With .failing()" title="With .failing()"></p>
+<h2 id="Mocking"><a href="#Mocking" class="headerlink" title="Mocking"></a>Mocking</h2><ul>
+<li>AVA doesn’t support mocking, just use any other mocking library like <a href="http://sinonjs.org/" target="_blank" rel="external">Sinon.js</a> or <a href="https://github.com/testdouble/testdouble.js/" target="_blank" rel="external">testdouble.js</a>.</li>
+</ul>
+<h2 id="Debug-in-Chrome-DevTools"><a href="#Debug-in-Chrome-DevTools" class="headerlink" title="Debug in Chrome DevTools"></a>Debug in Chrome DevTools</h2><ul>
+<li>Launch test file by <a href="https://github.com/jaridmargolin/inspect-process" target="_blank" rel="external">inspect-process</a>.</li>
+<li>Just use <code>debugger</code> keyword in the test file.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install --global inspect-process</div><div class="line">$ inspect node_modules/ava/profile.js &lt;your-test-file&gt;</div></pre></td></tr></table></figure>
+<h2 id="Debug-in-VS-Code"><a href="#Debug-in-VS-Code" class="headerlink" title="Debug in VS Code"></a>Debug in VS Code</h2><ul>
+<li>Add following configuration in the <code>launch.json</code></li>
+<li>Set the breakpoints and run.</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">"configurations": [</div><div class="line">        &#123;</div><div class="line">            "type": "node",</div><div class="line">            "request": "launch",</div><div class="line">            "name": "ava test",</div><div class="line">            "program": "$&#123;workspaceRoot&#125;/node_modules/ava/profile.js",</div><div class="line">            "args": [</div><div class="line">                "$&#123;file&#125;"</div><div class="line">            ]</div><div class="line">        &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="Trolls-amp-Bad-things"><a href="#Trolls-amp-Bad-things" class="headerlink" title="Trolls &amp; Bad things"></a>Trolls &amp; Bad things</h2><ul>
+<li>Must run with ava-cli</li>
+<li>Only can limit the execution time by CLI (global setting)<ul>
+<li>ava –timeout=30s </li>
+<li>Cannot set for each test case.</li>
+</ul>
+</li>
+<li>Must write tests carefully because of the concurrency.<ul>
+<li>e.g. Test transactions in a same table.</li>
+<li>Force test serialization<ul>
+<li><code>test.serial()</code></li>
+<li><code>$ ava --serial</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Other-reference"><a href="#Other-reference" class="headerlink" title="Other reference"></a>Other reference</h2><ul>
+<li>TypeScript in ava: <a href="https://github.com/avajs/ava/blob/master/docs/recipes/typescript.md" target="_blank" rel="external">https://github.com/avajs/ava/blob/master/docs/recipes/typescript.md</a></li>
+<li>Flow in AVA: <a href="https://github.com/avajs/ava/issues/986" target="_blank" rel="external">https://github.com/avajs/ava/issues/986</a></li>
+<li>React AVA workshop: <a href="https://github.com/kentcdodds/react-ava-workshop" target="_blank" rel="external">https://github.com/kentcdodds/react-ava-workshop</a></li>
+<li>Testing React components: <a href="https://github.com/avajs/ava/blob/master/docs/recipes/react.md" target="_blank" rel="external">https://github.com/avajs/ava/blob/master/docs/recipes/react.md</a></li>
+<li>Configuring Babel: <a href="https://github.com/avajs/ava/blob/master/docs/recipes/babelrc.md" target="_blank" rel="external">https://github.com/avajs/ava/blob/master/docs/recipes/babelrc.md</a></li>
+<li>Setting up AVA for browser testing: <a href="https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md" target="_blank" rel="external">https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://purepennons.github.io/2017/05/27/ava-futuristic-javaScript-test-runner/" data-id="cj3ae355w0002y9v0u22r2gnz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/purepennons" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/chiahao.node" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/05/09/test/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">test</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/27/ava-futuristic-javaScript-test-runner/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495383789675_image.png)" alt="ava-futuristic-javaScript-test-runner" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/test/">test</a></p>
+                            <p class="item-title"><a href="/2017/05/27/ava-futuristic-javaScript-test-runner/" class="title">ava-futuristic-javaScript-test-runner</a></p>
+                            <p class="item-date"><time datetime="2017-05-27T06:13:00.000Z" itemprop="datePublished">2017-05-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/09/test/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/05/09/test/" class="title">test</a></p>
+                            <p class="item-date"><time datetime="2017-05-08T17:16:46.000Z" itemprop="datePublished">2017-05-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/09/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/05/09/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2017-05-08T17:00:41.000Z" itemprop="datePublished">2017-05-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/test/">test</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ava/">ava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/">test</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ava/" style="font-size: 10px;">ava</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Chiahao Lin (Akiya)</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'Chiahao Lin (Akiya)';
+    
+    
+    var disqus_url = 'https://purepennons.github.io/2017/05/27/ava-futuristic-javaScript-test-runner/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
