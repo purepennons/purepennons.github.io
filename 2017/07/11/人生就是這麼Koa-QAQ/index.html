@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>人生就是這麼Koa...QAQ | Akiya の手記</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="node.js,koa,backend,web" />
+    
+    <meta name="description" content="人生就是這麼 Koa(2) … QAQ為什麼要 Koa? 而且還有可怕的 Error Handling … Sync 的 try… catch(err)… fn(err, callback) Promise.then().catch(err)  不同方式產生的 Error，沒有統一的 handle 方法。(對自己好一點，你值得擁有更好 &amp;gt;.0) 快速 Review 一下 Generator">
+<meta name="keywords" content="node.js,koa,backend,web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人生就是這麼Koa...QAQ">
+<meta property="og:url" content="https://purepennons.github.io/2017/07/11/人生就是這麼Koa-QAQ/index.html">
+<meta property="og:site_name" content="Akiya の手記">
+<meta property="og:description" content="人生就是這麼 Koa(2) … QAQ為什麼要 Koa? 而且還有可怕的 Error Handling … Sync 的 try… catch(err)… fn(err, callback) Promise.then().catch(err)  不同方式產生的 Error，沒有統一的 handle 方法。(對自己好一點，你值得擁有更好 &amp;gt;.0) 快速 Review 一下 Generator">
+<meta property="og:image" content="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499306736108_Screen+Shot+2017-07-06+at+10.04.41+AM.png">
+<meta property="og:updated_time" content="2017-07-11T07:20:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人生就是這麼Koa...QAQ">
+<meta name="twitter:description" content="人生就是這麼 Koa(2) … QAQ為什麼要 Koa? 而且還有可怕的 Error Handling … Sync 的 try… catch(err)… fn(err, callback) Promise.then().catch(err)  不同方式產生的 Error，沒有統一的 handle 方法。(對自己好一點，你值得擁有更好 &amp;gt;.0) 快速 Review 一下 Generator">
+<meta name="twitter:image" content="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499306736108_Screen+Shot+2017-07-06+at+10.04.41+AM.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Akiya の手記</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Backend/">Backend</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Security/">Security</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Testing/">Testing</a></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Backend/">Backend</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-人生就是這麼Koa-QAQ" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        人生就是這麼Koa...QAQ
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/07/11/人生就是這麼Koa-QAQ/" class="article-date">
+            <time datetime="2017-07-11T06:54:00.000Z" itemprop="datePublished">2017-07-11</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/backend/">backend</a>, <a class="tag-link" href="/tags/koa/">koa</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>, <a class="tag-link" href="/tags/web/">web</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="人生就是這麼-Koa-2-…-QAQ"><a href="#人生就是這麼-Koa-2-…-QAQ" class="headerlink" title="人生就是這麼 Koa(2) … QAQ"></a>人生就是這麼 Koa(2) … QAQ</h1><h2 id="為什麼要-Koa"><a href="#為什麼要-Koa" class="headerlink" title="為什麼要 Koa?"></a>為什麼要 Koa?</h2><p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499306736108_Screen+Shot+2017-07-06+at+10.04.41+AM.png" alt="callback hell"></p>
+<h3 id="而且還有可怕的-Error-Handling-…"><a href="#而且還有可怕的-Error-Handling-…" class="headerlink" title="而且還有可怕的 Error Handling …"></a>而且還有可怕的 Error Handling …</h3><ul>
+<li>Sync 的 try… catch(err)…</li>
+<li>fn(err, callback)</li>
+<li>Promise.then().catch(err)</li>
+</ul>
+<p>不同方式產生的 Error，沒有統一的 handle 方法。(<del>對自己好一點，你值得擁有更好 &gt;.0</del>)</p>
+<h2 id="快速-Review-一下-Generator"><a href="#快速-Review-一下-Generator" class="headerlink" title="快速 Review 一下 Generator"></a>快速 Review 一下 Generator</h2><p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499309215235_Screen+Shot+2017-07-06+at+10.46.34+AM.png" alt=""></p>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499309500530_Screen+Shot+2017-07-06+at+10.51.10+AM.png" alt=""></p>
+<h3 id="Generator-with-Promise"><a href="#Generator-with-Promise" class="headerlink" title="Generator with Promise"></a>Generator with Promise</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">// generator readFile</span></div><div class="line">    <span class="keyword">var</span> <span class="built_in">Promise</span> = <span class="built_in">require</span>(<span class="string">'bluebird'</span>)</div><div class="line">    <span class="keyword">var</span> fs = <span class="built_in">Promise</span>.promisifyAll(<span class="built_in">require</span>(<span class="string">'fs'</span>))</div><div class="line">    <span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="keyword">yield</span> fs.readFileAsync(<span class="string">'file1'</span>)</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'result'</span>, data.toString())</div><div class="line">      &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">        <span class="built_in">console</span>.error(<span class="string">'居然抓的到！！'</span>, err)</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 執行</span></div><div class="line">    <span class="keyword">var</span> g = gen()</div><div class="line">    <span class="comment">// result.value 為 readFileAsync 回傳的 Promise</span></div><div class="line">    <span class="keyword">var</span> result = g.next()</div><div class="line">    result.value</div><div class="line">        .then(<span class="function"><span class="params">data</span> =&gt;</span> g.next(data)) <span class="comment">// 將 result 扔回 generator</span></div><div class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> g.throw(err))</div><div class="line">    </div><div class="line"></div><div class="line"><span class="comment">// 拿掉執行的程式碼</span></div><div class="line"></div><div class="line">    <span class="comment">// generator readFile</span></div><div class="line">    <span class="keyword">var</span> <span class="built_in">Promise</span> = <span class="built_in">require</span>(<span class="string">'bluebird'</span>)</div><div class="line">    <span class="keyword">var</span> fs = <span class="built_in">Promise</span>.promisifyAll(<span class="built_in">require</span>(<span class="string">'fs'</span>))</div><div class="line">    <span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">var</span> data = <span class="keyword">yield</span> fs.readFileAsync(<span class="string">'file1'</span>)</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'result'</span>, data.toString())</div><div class="line">      &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">        <span class="built_in">console</span>.error(<span class="string">'居然抓的到！！'</span>, err)</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499309982570____.jpg" alt=""></p>
+<h3 id="等等，不對啊，要是我有很多非同步操作勒？"><a href="#等等，不對啊，要是我有很多非同步操作勒？" class="headerlink" title="等等，不對啊，要是我有很多非同步操作勒？"></a>等等，不對啊，要是我有很多非同步操作勒？</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// multi_async</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">Promise</span> = <span class="built_in">require</span>(<span class="string">'bluebird'</span>)</div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">Promise</span>.promisifyAll(<span class="built_in">require</span>(<span class="string">'fs'</span>))</div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">var</span> data1 = <span class="keyword">yield</span> fs.readFileAsync(<span class="string">'file1'</span>)</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'result1'</span>, data1.toString())</div><div class="line">    <span class="keyword">var</span> data2 = <span class="keyword">yield</span> fs.readFileAsync(<span class="string">'file2'</span>)</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'result2'</span>, data2.toString())</div><div class="line">    <span class="keyword">var</span> data3 = <span class="keyword">yield</span> fs.readFileAsync(<span class="string">'file3'</span>)</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'result2'</span>, data3.toString())</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    <span class="built_in">console</span>.error(<span class="string">'居然抓的到！！'</span>, err)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// 執行</span></div><div class="line"><span class="keyword">var</span> g = gen()</div><div class="line">g.next().value</div><div class="line">    .then(<span class="function"><span class="params">data1</span> =&gt;</span> g.next(data1).value)</div><div class="line">    .then(<span class="function"><span class="params">data2</span> =&gt;</span> g.next(data2).value)</div><div class="line">    .then(<span class="function"><span class="params">data3</span> =&gt;</span> g.next(data3).value)</div><div class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> g.throw(err))</div></pre></td></tr></table></figure>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499310711091_Screen+Shot+2017-07-06+at+11.11.36+AM.png" alt=""></p>
+<p><strong>本身執行過程是可以疊代的 (Iterative)，因此可以寫成執行器 (executor)</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// executor</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">gen</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> g = gen()</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> result = g.next(data)</div><div class="line">    <span class="keyword">if</span> (result.done) <span class="keyword">return</span> result.value</div><div class="line">    result.value</div><div class="line">        .then(<span class="function"><span class="params">data</span> =&gt;</span> next(data))</div><div class="line">        .catch(<span class="function"><span class="params">err</span> =&gt;</span> g.throw(err))</div><div class="line">  &#125;</div><div class="line">  next()</div><div class="line">&#125;</div><div class="line">run(gen)</div></pre></td></tr></table></figure></p>
+<h2 id="co-module"><a href="#co-module" class="headerlink" title="co module"></a><a href="https://github.com/tj/co" target="_blank" rel="external">co</a> module</h2><ul>
+<li>TJ 大神作品，Generator auto runner</li>
+<li><code>co(fn*)</code> 執行 generator 並 return Promise，因此允許 Generator in Generator</li>
+<li><code>co.wrap(fn*)</code> 可直接將 generator 轉換成 return Promise 的一般 function</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// use co as auto runner</span></div><div class="line">co(<span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> result = <span class="keyword">yield</span> <span class="built_in">Promise</span>.resolve(<span class="literal">true</span>)</div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;)</div><div class="line">.then(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value))</div><div class="line">.catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err.stack))</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// use co to convert generator function to a regular function</span></div><div class="line"><span class="keyword">var</span> fn = co.wrap(<span class="function"><span class="keyword">function</span>* (<span class="params">val</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">yield</span> <span class="built_in">Promise</span>.resolve(val)</div><div class="line">&#125;)</div><div class="line">fn(<span class="literal">true</span>)</div><div class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value))</div><div class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err.stack))</div></pre></td></tr></table></figure>
+<h3 id="所以講-Generator-是要幹嘛？"><a href="#所以講-Generator-是要幹嘛？" class="headerlink" title="所以講 Generator 是要幹嘛？"></a>所以講 Generator 是要幹嘛？</h3><ul>
+<li>因為 Koa1 就是基於 Generator (<del>雖然我們主題是 Koa2</del>)</li>
+<li>Koa1 與 Koa2 最大的差異就是 callback function 從 generator function → async/await function</li>
+</ul>
+<h3 id="async-await-又是什麼？"><a href="#async-await-又是什麼？" class="headerlink" title="async/await 又是什麼？"></a>async/await 又是什麼？</h3><ul>
+<li>沒什麼，就是標準化的 Generator auto runner (ECMAScript 2016/ES7)</li>
+<li>然後 function 宣告從 <code>function*()</code> → <code>async function()</code></li>
+<li>關鍵字 <code>yield</code> → <code>await</code></li>
+<li>一樣  return Promise</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> result = <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="literal">true</span>)</div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div><div class="line">fn()</div><div class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value))</div><div class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err))</div></pre></td></tr></table></figure>
+<h2 id="Koa-講這麼多，終於來到了苦啊"><a href="#Koa-講這麼多，終於來到了苦啊" class="headerlink" title="Koa - 講這麼多，終於來到了苦啊!"></a>Koa - 講這麼多，終於來到了苦啊!</h2><ul>
+<li>與 Express 概念類似的 node web framework，但是更陽春…</li>
+<li>Koa 相較於 express 的 callback 都是 regular function，其 callback function 皆是 async function，並自動幫你 handle 執行</li>
+</ul>
+<p><strong>當然如果你只想要在 Express 的 regular function 中，透過再宣告 async function 享受 async/await 語法，那就不用往下看了…</strong></p>
+<p><strong>Express</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</div><div class="line"><span class="keyword">const</span> app = express()</div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  res.send(<span class="string">'Hello World'</span>)</div><div class="line">&#125;)</div><div class="line">app.listen(<span class="number">3000</span>)</div></pre></td></tr></table></figure></p>
+<p><strong>Koa</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</div><div class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (ctx.method === <span class="string">'GET'</span> &amp;&amp; ctx.path === <span class="string">'/'</span>) &#123;</div><div class="line">        <span class="keyword">return</span> ctx.body = <span class="string">'Hello World'</span></div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">app.listen(<span class="number">3000</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="特色"><a href="#特色" class="headerlink" title="特色"></a>特色</h2><ul>
+<li>真的非常陽春，連 router 都沒有<ul>
+<li>不過社群有各種功能的 middleware 的實作可套用</li>
+</ul>
+</li>
+<li>將所有的物件與操作皆封裝至 <code>ctx</code> 物件底下<ul>
+<li>包含 <code>request</code> 與 <code>response</code> 物件</li>
+<li>設定了一堆 aliases 方便取用</li>
+</ul>
+</li>
+<li>middleware 包含 downstream 與 upstream</li>
+<li>基本的 Error Handling 處理<ul>
+<li>404 以及不會洩漏 server stack error</li>
+</ul>
+</li>
+<li>一切都是 async function，開心的同步思維與 try… catch(err)… 吧！</li>
+<li>…</li>
+</ul>
+<h2 id="app"><a href="#app" class="headerlink" title="app"></a>app</h2><blockquote>
+<p>同一個 Koa 應用不只能掛載到一個 HTTP Server</p>
+<h2 id="app-listen-port"><a href="#app-listen-port" class="headerlink" title="app.listen(port)"></a>app.listen(port)</h2><ul>
+<li>在特定 port 啟動監聽</li>
+<li>與 <code>http.createServer(app.callback()).listen(port)</code> 等價</li>
+</ul>
+</blockquote>
+<h3 id="app-callback"><a href="#app-callback" class="headerlink" title="app.callback()"></a>app.callback()</h3><ul>
+<li>返回可被 node HTTP server 接受的 callback function (<code>requestListener</code>)</li>
+<li><code>requestListener</code>: function(req, res) {}</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</div><div class="line">http.createServer(app.callback()).listen(<span class="number">3000</span>);</div><div class="line">http.createServer(app.callback()).listen(<span class="number">3001</span>);</div></pre></td></tr></table></figure>
+<h3 id="app-use-async-ctx-next-gt"><a href="#app-use-async-ctx-next-gt" class="headerlink" title="app.use(async (ctx, next) =&gt; {})"></a>app.use(async (ctx, next) =&gt; {})</h3><ul>
+<li>套用 middleware</li>
+<li><code>await next()</code> 之前為 downstream；<code>await next()</code> 之後為 upstream</li>
+<li>下節再詳述…</li>
+</ul>
+<h3 id="app-context"><a href="#app-context" class="headerlink" title="app.context"></a>app.context</h3><ul>
+<li>在 app 之間用於共享，類似 global value 的物件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.context.db = db();</div><div class="line">app.use(<span class="keyword">async</span> (ctx) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(ctx.db);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// x-response-time：計算每次請求到返回間的運行時間</span></div><div class="line"><span class="comment">// 這在 express 中非常難達成</span></div><div class="line">app.use(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">ctx, next</span>) </span>&#123;</div><div class="line">  <span class="comment">// downstream start</span></div><div class="line">  <span class="keyword">const</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">  <span class="comment">// downstream end</span></div><div class="line">  <span class="keyword">await</span> next(); <span class="comment">// 往下層 middlware 的 downstream 執行</span></div><div class="line">  <span class="comment">// upstream start</span></div><div class="line">  <span class="keyword">const</span> ms = <span class="keyword">new</span> <span class="built_in">Date</span>() - start;</div><div class="line">  ctx.set(<span class="string">'X-Response-Time'</span>, <span class="string">`<span class="subst">$&#123;ms&#125;</span>ms`</span>);</div><div class="line">  <span class="comment">// upstream end</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>再講一次，<code>await next()</code> 之前為 downstream；<code>await next()</code> 之後為 upstream</li>
+<li>每層 middleware 遇到 <code>await next()</code> 之後，會暫停執行，往下層 middleware 的 downstream</li>
+<li>直到最底層 middleware 的 downstream 執行完後，以倒序執行 upstream 的程式碼<ul>
+<li>下層 upstream 執行完後，繼續執行上一層的 upstream</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499340631301_Screen+Shot+2017-07-06+at+7.29.58+PM.png" alt=""></p>
+<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499340803197_middleware.gif" alt=""></p>
+<blockquote>
+<p>直接拿官方現成的<a href="https://github.com/koajs/koa/blob/master/docs/guide.md" target="_blank" rel="external">教學</a>，還是 koa1 的範例…</p>
+</blockquote>
+<h2 id="Simple-Demo-Code"><a href="#Simple-Demo-Code" class="headerlink" title="Simple Demo Code"></a>Simple Demo Code</h2><blockquote>
+<p><strong>Warning: the demo cannot work</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// token verify</span></div><div class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</div><div class="line">  <span class="comment">// get by query string</span></div><div class="line">  <span class="keyword">const</span> &#123; token &#125; = ctx.query</div><div class="line">  <span class="comment">// get by cookies</span></div><div class="line">  <span class="comment">// const token_in_cookies = ctx.cookies.get('token', &#123;httpOnly: true&#125;)</span></div><div class="line">  </div><div class="line">  <span class="comment">// get by headers</span></div><div class="line">  <span class="comment">// const &#123; authorization &#125; = ctx.headers</span></div><div class="line">  </div><div class="line">  <span class="comment">// get by request body (need koa-bodyparser middleware)</span></div><div class="line">  <span class="comment">// const &#123; token &#125; = ctx.request.body</span></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    ctx.state.user = JWT.verify(token, <span class="string">'secret_string'</span>)</div><div class="line">    <span class="keyword">await</span> next()</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    ctx.throw(<span class="number">401</span>, <span class="string">'Unauthorized'</span>)</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// find friends of the users</span></div><div class="line">app.use(<span class="keyword">async</span> ctx =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> &#123; db &#125; = ctx</div><div class="line">  <span class="keyword">const</span> &#123; id &#125; = ctx.state.user</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">const</span> friends = db.Friend.find(id)</div><div class="line">    ctx.status = <span class="number">200</span> <span class="comment">// 預設 response status code = 200</span></div><div class="line">    ctx.set(<span class="string">'ETag'</span>, <span class="string">'a-unique-hash-id'</span>)</div><div class="line">    ctx.body = &#123;</div><div class="line">      <span class="attr">code</span>: <span class="number">200</span>,</div><div class="line">      <span class="attr">status</span>: <span class="string">'success'</span></div><div class="line">      data: friends,</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    <span class="keyword">let</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'db error'</span>)</div><div class="line">    err.status = <span class="number">500</span></div><div class="line">    err.expose = <span class="literal">true</span>  <span class="comment">// 不會洩漏 server stack 給 client</span></div><div class="line">    <span class="keyword">throw</span> err</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Context, Request 與 Response 的用法還是去看<a href="http://koajs.com/" target="_blank" rel="external">官方文件</a>最快，後面只提出幾個比較特別的。</p>
+</blockquote>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><h3 id="ctx-state"><a href="#ctx-state" class="headerlink" title="ctx.state"></a>ctx.state</h3><ul>
+<li>用於傳遞暫存資料給不同 middlewares</li>
+<li>e.g. <code>ctx.state.user = await User.find(id)</code></li>
+</ul>
+<h2 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h2><h3 id="request-fresh-ctx-fresh"><a href="#request-fresh-ctx-fresh" class="headerlink" title="request.fresh (=ctx.fresh)"></a>request.fresh (=ctx.fresh)</h3><ul>
+<li>自動幫你透過 <code>If-None-Match</code> / <code>ETag</code> 與 <code>If-Modified-Since</code> / <code>Last-Modified</code> 比較快取是否過期</li>
+</ul>
+<h3 id="Content-Negotiation"><a href="#Content-Negotiation" class="headerlink" title="Content Negotiation"></a>Content Negotiation</h3><blockquote>
+<p>Koa 的 request 物件可幫你設定一些請求的接受型態</p>
+<ul>
+<li>request.accepts(types)</li>
+<li>request.acceptsEncodings(types)</li>
+<li>request.acceptsCharsets(charsets)</li>
+<li>request.acceptsLanguages(langs)</li>
+</ul>
+</blockquote>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><h3 id="response-body-ctx-body"><a href="#response-body-ctx-body" class="headerlink" title="response.body (=ctx.body)"></a>response.body (=ctx.body)</h3><blockquote>
+<p>非常強大的 response 方式，無需根據返回類型選擇不同的回應方法，一律使用 response.body = xxx</p>
+<ul>
+<li>接受 string, Buffer, Stream, Object || Array, null 類型<ul>
+<li>Object || Array 為 JSON.stringify 後的結果</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h2><ul>
+<li>在 Koa 的錯誤處理非常單純，直接 try… catch(err)…，然後拋出 error 即可<ul>
+<li><strong>注意：拋出的 error，一樣會走完每層 upstream，所以可以在每層 middleware 中 catch 到底層丟上來的錯誤，因此非必要，不要修改 error，直接往上拋即可，否則取得的 error 可能不是預期的</strong></li>
+</ul>
+</li>
+<li>Koa 預設的錯誤處理的行為是會將除了 404 與 <code>err.expose=true</code> 以外的錯誤全輸出至 stderr</li>
+<li>可透過 <code>app.on(&#39;error&#39;, cb(err, ctx))</code> 覆寫預設的錯誤處理</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// do nothing, just pass</span></div><div class="line">    <span class="keyword">await</span> next()</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    <span class="comment">// get a error from the deeper middleware</span></div><div class="line">    <span class="comment">// don't modify, just throw up</span></div><div class="line">    <span class="keyword">throw</span> err  <span class="comment">// err = Error('Server Error')</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(<span class="keyword">async</span> ctx =&gt; &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Server Error'</span>)</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    <span class="keyword">throw</span> err</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.on(<span class="string">'error'</span>, (err, ctx) =&gt; &#123;</div><div class="line">  <span class="comment">// 覆寫預設錯誤處理的行為</span></div><div class="line">  <span class="comment">// 若是發生的錯誤會導致 Koa 連 response 也無法，則會額外傳遞錯誤發生時的 ctx</span></div><div class="line">  <span class="built_in">console</span>.error(<span class="string">'error'</span>, err.stack)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><blockquote>
+<p>Koa 的第三方實作有許多套，這邊介紹最流行的 <a href="https://github.com/alexmingoia/koa-router" target="_blank" rel="external">koa-router</a></p>
+</blockquote>
+<h3 id="特色-1"><a href="#特色-1" class="headerlink" title="特色"></a>特色</h3><ul>
+<li>Express-style routing<ul>
+<li>e.g. <code>app.get</code>, <code>app.put</code>, <code>app.post</code> …</li>
+</ul>
+</li>
+<li>callback 可吃 regular function, generator function 與 async function</li>
+<li>根據定義的 routing，自動提供 <code>OPTIONS</code> 方法<ul>
+<li>並提供自動回應 <code>405 Method Not Allowed</code> 與 <code>501 Not Implemented</code> 的功能</li>
+</ul>
+</li>
+<li>router 可巢狀定義再合併</li>
+</ul>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> app = <span class="built_in">require</span>(<span class="string">'koa'</span>)()</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)()</div><div class="line"></div><div class="line">router.get(<span class="string">'/'</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;...&#125;)</div><div class="line">router.post(<span class="string">'/:variable'</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;...&#125;)</div><div class="line"></div><div class="line">app</div><div class="line">  .use(router.routes())</div><div class="line">  .use(router.allowedMethods())</div></pre></td></tr></table></figure>
+<ul>
+<li><code>router.get|put|post|patch|delete(path, ...middleware)</code>：routing 定義</li>
+<li><code>router.routes()</code>：返回全部定義的 routing 的 middleware</li>
+<li><code>router.allowedMethods()</code>：返回允許的 <code>OPTIONS</code> 的 middleware，內容為所有定義的 routing 的方法</li>
+<li><code>router.use([path], ...middleware)</code>：可根據 routing 套用多個 middleware</li>
+<li><code>router.param(param, middleware)</code>：若定義的 routing 有符合 <code>param</code> 可在進入 routing 前，透過 middleware 預先處理這個 <code>param</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">router</div><div class="line">  .param(<span class="string">'user'</span>, (id, ctx, next) =&gt; &#123;</div><div class="line">    ctx.user = users[id]</div><div class="line">    <span class="keyword">if</span> (!ctx.user) <span class="keyword">return</span> ctx.status = <span class="number">404</span></div><div class="line">    <span class="keyword">return</span> next()</div><div class="line">  &#125;)</div><div class="line">  .get(<span class="string">'/users/:user'</span>, <span class="keyword">async</span> ctx =&gt; ctx.body = ctx.user)</div><div class="line">  .get(<span class="string">'/users/:user/friends'</span>, <span class="keyword">async</span> ctx =&gt; ctx.body = <span class="keyword">await</span> ctx.user.getFriends())</div></pre></td></tr></table></figure>
+<h3 id="複雜的巢狀例子"><a href="#複雜的巢狀例子" class="headerlink" title="複雜的巢狀例子"></a>複雜的巢狀例子</h3><blockquote>
+<p>假設現在有 <code>/auth</code> 與 <code>/users</code> 兩支 routing，分別定義在  <code>auth.js</code> 與 <code>users.js</code>，並透過 <code>routes/index.js</code> 合併 routes。在 Koa 中直接引用 <code>routes/index.js</code> 匯出的 route。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// auth.js</span></div><div class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)</div><div class="line"><span class="keyword">const</span> router = Router()</div><div class="line">router</div><div class="line">    .use(someMiddleware)</div><div class="line">    .post(<span class="string">'/login'</span>, ctx =&gt; &#123;...&#125;)</div><div class="line">    .post(<span class="string">'/logout'</span>, ctx =&gt; &#123;...&#125;)</div><div class="line"><span class="built_in">module</span>.exports = router</div><div class="line"></div><div class="line"><span class="comment">// users.js</span></div><div class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)</div><div class="line"><span class="keyword">const</span> router = Router()</div><div class="line"><span class="keyword">const</span> auth_mid = <span class="built_in">require</span>(<span class="string">'../middlewares/auth'</span>)</div><div class="line">router</div><div class="line">    .get(<span class="string">'/:userID'</span>, ctx =&gt; &#123;</div><div class="line">      <span class="keyword">const</span> &#123; userID &#125; = ctx.params  <span class="comment">// 透過 ctx.params 存取 route url 變數</span></div><div class="line">      <span class="comment">// ctx.body = ... </span></div><div class="line">    &#125;)</div><div class="line"><span class="built_in">module</span>.exports = router</div><div class="line"></div><div class="line"><span class="comment">// routes/index.js (routes)</span></div><div class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)</div><div class="line"><span class="keyword">const</span> router = Router()</div><div class="line"><span class="keyword">const</span> auth_routes = <span class="built_in">require</span>(<span class="string">'./auth'</span>)</div><div class="line"><span class="keyword">const</span> users_routes = <span class="built_in">require</span>(<span class="string">'./users'</span>)</div><div class="line">router</div><div class="line">    .use(<span class="string">'/v1/auth'</span>, auth_routes.routes(), auth_routes.allowedMethods())</div><div class="line">    .use(<span class="string">'/v1/users'</span>, users_routes.routes(), users_routes.allowedMethods())</div><div class="line"><span class="built_in">module</span>.exports = router</div><div class="line"></div><div class="line"><span class="comment">// index.js (koa app)</span></div><div class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>)</div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</div><div class="line">app.use(router.routes())</div><div class="line">app.listen(<span class="number">3000</span>)</div></pre></td></tr></table></figure>
+<h2 id="常用的-middleware"><a href="#常用的-middleware" class="headerlink" title="常用的 middleware"></a>常用的 middleware</h2><ul>
+<li><a href="https://github.com/koajs/bodyparser" target="_blank" rel="external">koa-bodyparser</a>：parsing body request</li>
+<li><a href="https://github.com/koajs/logger" target="_blank" rel="external">koa-logger</a>：會有 request/response 的資訊輸出</li>
+<li><a href="https://github.com/koajs/cors" target="_blank" rel="external">kcors</a>：設定 cross domain access</li>
+<li><a href="https://github.com/koajs/json" target="_blank" rel="external">koa-json</a>：讓 json response 的 router 帶有 <code>pretty</code> query string，可美化 json response</li>
+<li><a href="https://github.com/koajs/static" target="_blank" rel="external">koa-static</a>：指定資料夾輸出靜態檔案</li>
+<li><a href="https://github.com/koajs/session" target="_blank" rel="external">koa-session</a>：session in Koa</li>
+</ul>
+<h3 id="使用-compose-合併-middleware"><a href="#使用-compose-合併-middleware" class="headerlink" title="使用 compose 合併 middleware"></a>使用 compose 合併 middleware</h3><blockquote>
+<p><a href="https://github.com/koajs/compose" target="_blank" rel="external">koa-compose</a> 可以將多個 middleware 合併成一個，讓程式碼更加優雅</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> compose = <span class="built_in">require</span>(<span class="string">'koa-compose'</span>)</div><div class="line">app.use(compose([</div><div class="line">  middleware1,</div><div class="line">  middleware2,</div><div class="line">  ...</div><div class="line">]))</div></pre></td></tr></table></figure>
+<h2 id="Simple-JWT-Demo-with-Koa2"><a href="#Simple-JWT-Demo-with-Koa2" class="headerlink" title="Simple JWT Demo with Koa2"></a><a href="https://github.com/purepennons/jwt_demo" target="_blank" rel="external">Simple JWT Demo with Koa2</a></h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>koajs: <a href="http://koajs.com/" target="_blank" rel="external">http://koajs.com/</a></li>
+<li>Koa guide: <a href="https://github.com/koajs/koa/blob/master/docs/guide.md" target="_blank" rel="external">https://github.com/koajs/koa/blob/master/docs/guide.md</a></li>
+<li>js543: <a href="http://slides.com/chiahaolin/js543" target="_blank" rel="external">http://slides.com/chiahaolin/js543</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="https://purepennons.github.io/2017/07/11/人生就是這麼Koa-QAQ/" data-id="cj4z905kg0005pcry2aa2r2vz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/purepennons" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/chiahao.node" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/06/25/毫無反應，就是個 JWT/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">JSON-WEB-TOKEN-JWT</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/07/11/人生就是這麼Koa-QAQ/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499306736108_Screen+Shot+2017-07-06+at+10.04.41+AM.png)" alt="人生就是這麼Koa...QAQ" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Backend/">Backend</a></p>
+                            <p class="item-title"><a href="/2017/07/11/人生就是這麼Koa-QAQ/" class="title">人生就是這麼Koa...QAQ</a></p>
+                            <p class="item-date"><time datetime="2017-07-11T06:54:00.000Z" itemprop="datePublished">2017-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/06/25/毫無反應，就是個 JWT/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://d2mxuefqeaa7sj.cloudfront.net/s_4617CF3AD1C6FD6B459F67A43B9CB1C71D3924170417C6F60A2A1570BBBA3F1A_1497544064402_Screen+Shot+2017-06-16+at+12.27.14+AM.png)" alt="JSON-WEB-TOKEN-JWT" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Security/">Security</a></p>
+                            <p class="item-title"><a href="/2017/06/25/毫無反應，就是個 JWT/" class="title">JSON-WEB-TOKEN-JWT</a></p>
+                            <p class="item-date"><time datetime="2017-06-25T00:40:00.000Z" itemprop="datePublished">2017-06-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/27/ava-futuristic-javaScript-test-runner/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://d2mxuefqeaa7sj.cloudfront.net/s_40E81CC28D06286B542B06554F0AD203FFC3CC719886DFCA8E86E84FE46DB9D5_1495383789675_image.png)" alt="AVA: Futuristic JavaScript Test Runner" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Testing/">Testing</a></p>
+                            <p class="item-title"><a href="/2017/05/27/ava-futuristic-javaScript-test-runner/" class="title">AVA: Futuristic JavaScript Test Runner</a></p>
+                            <p class="item-date"><time datetime="2017-05-27T06:13:00.000Z" itemprop="datePublished">2017-05-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/09/hello-world/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/05/09/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2017-05-08T17:00:41.000Z" itemprop="datePublished">2017-05-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Backend/">Backend</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Testing/">Testing</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JWT/">JWT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ava/">ava</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backend/">backend</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">node.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/">security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/JWT/" style="font-size: 10px;">JWT</a> <a href="/tags/ava/" style="font-size: 10px;">ava</a> <a href="/tags/backend/" style="font-size: 10px;">backend</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/node-js/" style="font-size: 20px;">node.js</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Chiahao Lin (Akiya)</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'Chiahao Lin (Akiya)';
+    
+    
+    var disqus_url = 'https://purepennons.github.io/2017/07/11/人生就是這麼Koa-QAQ/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
