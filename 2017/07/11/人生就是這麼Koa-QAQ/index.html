@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Akiya の手記">
 <meta property="og:description" content="人生就是這麼 Koa(2) … QAQ為什麼要 Koa? 而且還有可怕的 Error Handling … Sync 的 try… catch(err)… fn(err, callback) Promise.then().catch(err)  不同方式產生的 Error，沒有統一的 handle 方法。(對自己好一點，你值得擁有更好 &amp;gt;.0) 快速 Review 一下 Generator">
 <meta property="og:image" content="https://d2mxuefqeaa7sj.cloudfront.net/s_941867539D62F98246DF5A04E5A5D2BF36303DEA156222505B5150FDF73403B6_1499306736108_Screen+Shot+2017-07-06+at+10.04.41+AM.png">
-<meta property="og:updated_time" content="2017-07-11T10:15:26.000Z">
+<meta property="og:updated_time" content="2017-07-11T10:17:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人生就是這麼Koa...QAQ">
 <meta name="twitter:description" content="人生就是這麼 Koa(2) … QAQ為什麼要 Koa? 而且還有可怕的 Error Handling … Sync 的 try… catch(err)… fn(err, callback) Promise.then().catch(err)  不同方式產生的 Error，沒有統一的 handle 方法。(對自己好一點，你值得擁有更好 &amp;gt;.0) 快速 Review 一下 Generator">
@@ -300,7 +300,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">app.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="comment">// do nothing, just pass</span></div><div class="line">    <span class="keyword">await</span> next()</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    <span class="comment">// get a error from the deeper middleware</span></div><div class="line">    <span class="comment">// don't modify, just throw up</span></div><div class="line">    <span class="keyword">throw</span> err  <span class="comment">// err = Error('Server Error')</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(<span class="keyword">async</span> ctx =&gt; &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Server Error'</span>)</div><div class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</div><div class="line">    <span class="keyword">throw</span> err</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.on(<span class="string">'error'</span>, (err, ctx) =&gt; &#123;</div><div class="line">  <span class="comment">// 覆寫預設錯誤處理的行為</span></div><div class="line">  <span class="comment">// 若是發生的錯誤會導致 Koa 連 response 也無法，則會額外傳遞錯誤發生時的 ctx</span></div><div class="line">  <span class="built_in">console</span>.error(<span class="string">'error'</span>, err.stack)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><blockquote>
-<p>Koa 的第三方實作有許多套，這邊介紹最流行的 <a href="https://github.com/alexmingoia/koa-router" target="_blank" rel="external">koa-router</a></p>
+<p>Koa 的第三方套件有許多套實作，這邊介紹最流行的 <a href="https://github.com/alexmingoia/koa-router" target="_blank" rel="external">koa-router</a></p>
 </blockquote>
 <h3 id="特色-1"><a href="#特色-1" class="headerlink" title="特色"></a>特色</h3><ul>
 <li>Express-style routing<ul>
@@ -351,7 +351,7 @@
 
 
 
-    <a data-url="https://purepennons.github.io/2017/07/11/人生就是這麼Koa-QAQ/" data-id="cj4zf8o060006j1ryuypf9hyp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://purepennons.github.io/2017/07/11/人生就是這麼Koa-QAQ/" data-id="cj4zfbioz0005poryf7aow171" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
